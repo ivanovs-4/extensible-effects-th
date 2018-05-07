@@ -1,3 +1,5 @@
+This is a helper for using `Program` effects from https://hackage.haskell.org/package/extensible-effects
+
 Module `Control.Eff.Operational.TH` exports single method `mkProgramOps`
 
 Let's say your DSL is represented by data structure

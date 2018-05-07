@@ -1,0 +1,56 @@
+name:           extensible-effects-th
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/ivanovs-4/extensible-effects-th#readme>
+synopsis:       Helper to generate dsl operations for Control.Eff.Operational
+category:       Control, Effect
+homepage:       https://github.com/ivanovs-4/extensible-effects-th#readme
+bug-reports:    https://github.com/ivanovs-4/extensible-effects-th/issues
+author:         Sergey Ivanov
+maintainer:     ivanovs-4@yandex.ru
+copyright:      2018 Sergey Ivanov
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    ChangeLog.md
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/ivanovs-4/extensible-effects-th
+
+flag examples
+  description: Build examples
+  manual: True
+  default: False
+
+library
+  exposed-modules:
+      Control.Eff.Operational.TH
+  other-modules:
+      Paths_extensible_effects_th
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , template-haskell
+  default-language: Haskell2010
+
+executable ee-simple
+  main-is: Simple.hs
+  other-modules:
+      Paths_extensible_effects_th
+  hs-source-dirs:
+      examples
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , extensible-effects
+    , extensible-effects-th
+  if flag(examples)
+    buildable: True
+  else
+    buildable: False
+  default-language: Haskell2010
