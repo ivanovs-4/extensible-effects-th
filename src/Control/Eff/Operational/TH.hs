@@ -79,6 +79,7 @@ liftDec (DataD _ tyName tyVarBndrs _ cons _)
         mconcat <$> forM cons (liftCon (ConT tyName) nextTyName)
 liftDec dec = fail $ "liftDec: Don't know how to lift " <> show dec
 
+-- | Genarate definitions for DSL operations expressed by the data type
 mkProgramOps :: Name -> Q [Dec]
 mkProgramOps typCon = do
     typInfo <- reify typCon

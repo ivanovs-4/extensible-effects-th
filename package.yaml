@@ -10,26 +10,40 @@ extra-source-files:
 - README.md
 - ChangeLog.md
 
-# Metadata used when publishing your package
-# synopsis:            Short description of your package
+synopsis:            Helper to generate dsl operations for Control.Eff.Operational
 category:            Control, Effect
 
 description:         Please see the README on GitHub at <https://github.com/ivanovs-4/extensible-effects-th#readme>
 
 dependencies:
 - base >= 4.7 && < 5
-- template-haskell
 
 library:
   source-dirs: src
+  dependencies:
+  - template-haskell
 
-tests:
-  extensible-effects-th-test:
-    main:                Spec.hs
-    source-dirs:         test
+executables:
+  ee-simple:
+    main:                Simple.hs
+    source-dirs:         examples
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - extensible-effects
     - extensible-effects-th
+    when:
+      - condition: flag(examples)
+        then:
+          buildable: true
+        else:
+          buildable: false
+
+flags:
+  examples:
+    description:       Build examples
+    manual:            true
+    default:           false
+
